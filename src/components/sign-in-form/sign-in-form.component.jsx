@@ -22,17 +22,15 @@ const SignInForm = () => {
     }
 
     const logGoogleUser = async () => {
-        const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
       };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         
         try {   
-            const response = await signInAuthUsersWithEmailAndPassword(email, password)
-            console.log(response);
-            resetFormFields();
+            const { user } = await signInAuthUsersWithEmailAndPassword(email, password);
+            resetFormFields()
         } catch(error) {
             switch(error.code) {
                 case 'auth/too-many-requests': 
