@@ -6,6 +6,7 @@ import Button from '../button/button.component';
 import { createUserDocumentFromAuth, signInWithGooglePopup, signInAuthUsersWithEmailAndPassword} from '../../utils/firebase/firebase.utils';
 
 import './sign-in-form.styles.scss'
+import { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 const defaultFormFields = {
     email: '',
@@ -80,7 +81,7 @@ const SignInForm = () => {
                 value={password}/>
                 <div className='buttons-container'>
                     <Button type="submit"> Sign in </Button>
-                    <Button type="button" buttonType="google" onClick={logGoogleUser}> Sign in with Google </Button>
+                    <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={logGoogleUser}> Sign in with Google </Button>
                 </div>
             </form>
         </div>
