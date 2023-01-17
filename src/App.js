@@ -4,9 +4,10 @@ import { useDispatch } from "react-redux";
 
 import {
   createUserDocumentFromAuth,
+  getCurrentUser,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebase.utils";
-import { setCurrentUser } from "./store/user/user.action";
+import { checkUserSession, setCurrentUser } from "./store/user/user.action";
 
 import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
@@ -21,17 +22,16 @@ const App = () => {
   // since this is used for initialization
   // USER REDUCER
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
+    // const unsubscribe = onAuthStateChangedListener((user) => {
+    //   if (user) {
+    //     createUserDocumentFromAuth(user);
+    //   }
+    //   dispatch(setCurrentUser(user));
+    // });
+    // return unsubscribe;
 
-    return unsubscribe;
-  }, [dispatch]);
-
-  
+    dispatch(checkUserSession());
+  }, []);
 
   return (
     <Routes>
